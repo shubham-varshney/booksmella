@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -17,6 +17,13 @@ form {
     border: 3px solid #f1f1f1;
 }
 
+
+
+.container{
+margin-top:10px;
+background-color:#D3D3D3;
+
+}
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -35,6 +42,19 @@ button {
     cursor: pointer;
     width: 100%;
 }
+
+
+#submit{
+background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+
 
 .cancelbtn {
     width: auto;
@@ -82,14 +102,22 @@ span.psw {
 
 <%@include file="templates/Header.jsp" %>
 
+<div class="container">
+
+<c:if test="${not empty msg}">
+                <div class="msg">${msg}</div>
+            </c:if>
+
+
+
 <h1><center><i>Login Form</i></h1>
 
 
-<form:form action="<_c:urlvalue="/j_spring_security_check">" method="post" commandNmae="login">
+<form action="<c:url value="/j_spring_security_check" />"  method="post">
 
-<c:iftest="${not empty error}">
+<c:if test="${not empty error}">
 <div class="error">${error}</div>
-</c:iftest>
+</c:if>
 
 
   <div class="imgcontainer">
@@ -98,17 +126,17 @@ span.psw {
 
   <div class="form-group">
     <label for="username"><b>Username</b></label>
-    <form:input placeholder="Enter Username" path="username" required class="form-control"/>
+    <input type="text" placeholder="Enter Username" path="username" name="username" required class="form-control"/>
   </div>
 
   <div class="form-group">
     <label for="password"><b>Password</b></label>
-    <form:input path="password" placeholder="Enter Password" required class="form-control"/>
+    <input type="password" path="password" placeholder="Enter Password" name="" required class="form-control"/>
     </div>
     
         <div class="form-group">
 
-<input type="submit" value="login" class="btn btn-default" /></div>
+<input type="submit" value="login" class="btn btn-default" id="submit" /></div>
 
 
     <input type="checkbox" checked="checked" value="remember me"/>
@@ -117,14 +145,14 @@ span.psw {
     <button type="button" class="cancelbtn">Cancel</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
+  s
   
   
-  
 
-</form:form>
-
+</form>
 
 
+</div>
    <%@include file="templates/Footer.jsp" %>
 
 
